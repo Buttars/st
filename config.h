@@ -104,7 +104,7 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 8;
+unsigned int tabspaces = 2;
 
 /* bg opacity */
 float alpha = 0.8;
@@ -112,41 +112,92 @@ float alphaOffset = 0.0;
 float alphaUnfocus;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
-	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
-	"#cc241d",
-	"#98971a",
-	"#d79921",
-	"#458588",
-	"#b16286",
-	"#689d6a",
-	"#a89984",
-	"#928374",
-	"#fb4934",
-	"#b8bb26",
-	"#fabd2f",
-	"#83a598",
-	"#d3869b",
-	"#8ec07c",
-	"#ebdbb2",
-	[255] = 0,
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#282828", /* 258 -> bg */
-	"#ebdbb2", /* 259 -> fg */
-};
+// static const char *colorname[] = {
+// 	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
+// 	"#cc241d",
+// 	"#98971a",
+// 	"#d79921",
+// 	"#458588",
+// 	"#b16286",
+// 	"#689d6a",
+// 	"#a89984",
+// 	"#928374",
+// 	"#fb4934",
+// 	"#b8bb26",
+// 	"#fabd2f",
+// 	"#83a598",
+// 	"#d3869b",
+// 	"#8ec07c",
+// 	"#ebdbb2",
+// 	[255] = 0,
+// 	/* more colors can be added after 255 to use with DefaultXX */
+// 	"#add8e6", /* 256 -> cursor */
+// 	"#555555", /* 257 -> rev cursor*/
+// 	"#282828", /* 258 -> bg */
+// 	"#ebdbb2", /* 259 -> fg */
+// };
+//
+//
+// /*
+//  * Default colors (colorname index)
+//  * foreground, background, cursor, reverse cursor
+//  */
+// unsigned int defaultfg = 259;
+// unsigned int defaultbg = 258;
+// unsigned int defaultcs = 256;
+// unsigned int defaultrcs = 257;
+// unsigned int background = 258;
 
+/* Terminal colors (16 first used in escape sequence) */
+static const char *colorname[] = {
+
+  /* 8 normal colors */
+  [0] = "#2a2d32", /* black   */
+  [1] = "#ff276d", /* red     */
+  [2] = "#00ffdb", /* green   */
+  [3] = "#ffb863", /* yellow  */
+  [4] = "#6cb1ff", /* blue    */
+  [5] = "#b184ef", /* magenta */
+  [6] = "#67d3c2", /* cyan    */
+  [7] = "#f3f3f3", /* white   */
+
+  /* 8 bright colors */
+  [8]  = "#2a2d32", /* black   */
+  [9]  = "#ff276d", /* red     */
+  [10] = "#00ffdb", /* green   */
+  [11] = "#ffb863", /* yellow  */
+  [12] = "#6cb1ff", /* blue    */
+  [13] = "#b184ef", /* magenta */
+  [14] = "#67d3c2", /* cyan    */
+  [15] = "#f3f3f0", /* white   */
+
+  [255] = 0,
+
+  /* special colors */
+  "#add8e6", /* 256 -> cursor */
+  "#555555", /* 257 -> rev cursor*/
+  "#1f1f1f", /* background */
+  "#f3f3f3", /* foreground */
+};
 
 /*
  * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
+ * foreground, background, cursor
  */
 unsigned int defaultfg = 259;
 unsigned int defaultbg = 258;
 unsigned int defaultcs = 256;
 unsigned int defaultrcs = 257;
 unsigned int background = 258;
+
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
+
 
 /*
  * Default shape of cursor
